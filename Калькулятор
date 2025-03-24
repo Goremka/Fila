@@ -1,0 +1,74 @@
+using System;
+
+class Calculator
+{
+    static void Main()
+    {
+        Console.WriteLine("Консольный калькулятор");
+        Console.WriteLine("---------------------");
+        Console.WriteLine("Доступные операции:");
+        Console.WriteLine("+ - сложение");
+        Console.WriteLine("- - вычитание");
+        Console.WriteLine("* - умножение");
+        Console.WriteLine("/ - деление");
+        Console.WriteLine("q - выход");
+        
+        while (true)
+        {
+            try
+            {
+                Console.Write("\nВведите первое число: ");
+                string input = Console.ReadLine();
+                
+                if (input.ToLower() == "q")
+                    break;
+                    
+                double num1 = double.Parse(input);
+                
+                Console.Write("Введите операцию (+, -, *, /): ");
+                char op = Console.ReadLine()[0];
+                
+                Console.Write("Введите второе число: ");
+                double num2 = double.Parse(Console.ReadLine());
+                
+                double result = 0;
+                
+                switch (op)
+                {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 == 0)
+                        {
+                            Console.WriteLine("Ошибка: деление на ноль!");
+                            continue;
+                        }
+                        result = num1 / num2;
+                        break;
+                    default:
+                        Console.WriteLine("Неверная операция!");
+                        continue;
+                }
+                
+                Console.WriteLine($"Результат: {num1} {op} {num2} = {result}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: введено не число!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Произошла ошибка: {ex.Message}");
+            }
+        }
+        
+        Console.WriteLine("Работа калькулятора завершена.");
+    }
+}
